@@ -1,0 +1,42 @@
+name: Windows Build & Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-and-screenshot:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build Windows .exe
+        run: npm run build:win
+      
+      - name: Create placeholder screenshot
+        shell: powershell
+        run: |
+          mkdir screenshots
+          @"
+          <!DOCTYPE html><html><head><title>FloatBoard Windows Build</title>
+          <style>body{background:#1a1a2e;color:white;text-align:center;padding:50px;font-family:sans-serif}
+          .window{background:#0f0f23;border-radius:12px;padding:30px;max-width:500px;margin:0 auto}
+          h1{color:#65f0d5}.btn{background:#65f0d5;color:#0a0a0f;padding:12px 24px;border-radius:8px}
+          </style></head><body><div class="window"><h1>FloatBoard</h1>
+          <p>Your clipboard, always on top.</p>
+          <p style="color:#999">Windows .exe built successfully ✅</p>
+          <p class="btn">Download for Free</p></div></body></html>
+          "@ > screenshots/screenshot.html
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FloatBoard-Windows-Build
+          path: |
+            dist/windows/*.exe
+            screenshots/screenshot.html
