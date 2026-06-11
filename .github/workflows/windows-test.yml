@@ -46,7 +46,5 @@ jobs:
       
       - uses: actions/upload-artifact@v4
         with:
-          name: FloatBoard-Windows-Build
-          path: |
-            dist/windows/*.exe
-            screenshots/screenshot.png
+          name: FloatBoard-Windows-Screenshot
+          path: screenshots/screenshot.png
