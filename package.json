@@ -37,13 +37,8 @@
     },
     "files": [
       "main.js",
-      "preload.js",
       "index.html",
-      "renderer.js",
-      "style.css",
-      "upgrade.css",
       "license.js",
-      "seo.js",
       "assets/**/*"
     ],
     "mac": {
