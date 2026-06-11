@@ -19,24 +19,32 @@ jobs:
       - name: Build Windows .exe
         run: npm run build:win
       
-      - name: Create placeholder screenshot
+      - name: Take Real Screenshot
         shell: powershell
         run: |
           mkdir screenshots
-          @"
-          <!DOCTYPE html><html><head><title>FloatBoard Windows Build</title>
-          <style>body{background:#1a1a2e;color:white;text-align:center;padding:50px;font-family:sans-serif}
-          .window{background:#0f0f23;border-radius:12px;padding:30px;max-width:500px;margin:0 auto}
-          h1{color:#65f0d5}.btn{background:#65f0d5;color:#0a0a0f;padding:12px 24px;border-radius:8px}
-          </style></head><body><div class="window"><h1>FloatBoard</h1>
-          <p>Your clipboard, always on top.</p>
-          <p style="color:#999">Windows .exe built successfully ✅</p>
-          <p class="btn">Download for Free</p></div></body></html>
-          "@ > screenshots/screenshot.html
+          
+          # Start the unpacked application in the background
+          Start-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"
+          
+          # Wait for the application to load and render
+          Start-Sleep -Seconds 10
+          
+          # Take a screenshot
+          Add-Type -AssemblyName System.Windows.Forms
+          Add-Type -AssemblyName System.Drawing
+          $Screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+          $Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
+          $Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)
+          $Graphics.CopyFromScreen($Screen.X, $Screen.Y, 0, 0, $Bitmap.Size)
+          $Bitmap.Save("screenshots/screenshot.png")
+          
+          # Kill the application so workflow can finish
+          Stop-Process -Name "FloatBoard" -Force -ErrorAction SilentlyContinue
       
       - uses: actions/upload-artifact@v4
         with:
           name: FloatBoard-Windows-Build
           path: |
             dist/windows/*.exe
-            screenshots/screenshot.html
+            screenshots/screenshot.png
