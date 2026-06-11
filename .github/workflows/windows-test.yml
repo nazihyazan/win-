@@ -26,11 +26,15 @@ jobs:
         run: |
           mkdir screenshots
           
+          # Minimize all background windows (like the runner console itself)
+          (New-Object -ComObject Shell.Application).MinimizeAll()
+          Start-Sleep -Seconds 2
+          
           # Start the unpacked application in the background
           Start-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"
           
           # Wait for the application to load and render
-          Start-Sleep -Seconds 10
+          Start-Sleep -Seconds 15
           
           # Take a screenshot
           Add-Type -AssemblyName System.Windows.Forms
