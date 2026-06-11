@@ -1,0 +1,241 @@
+build-and-screenshot	Set up job	﻿2026-06-11T23:08:03.5395665Z Current runner version: '2.335.1'
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5446284Z ##[group]Runner Image Provisioner
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5447151Z Hosted Compute Agent
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5447687Z Version: 20260527.539
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5448266Z Commit: a891dd388383b896fa6ac04a82c0b75cec981078
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5448934Z Build Date: 2026-05-27T21:39:57Z
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5449566Z Worker ID: {23c312f7-85e6-4eb2-a52f-f50adfd008ac}
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5450234Z Azure Region: westus
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5450814Z ##[endgroup]
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5452156Z ##[group]Operating System
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5452813Z Microsoft Windows Server 2025
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5453373Z 10.0.26100
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5453835Z Datacenter
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5454305Z ##[endgroup]
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5454791Z ##[group]Runner Image
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5455330Z Image: windows-2025-vs2026
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5455898Z Version: 20260608.135.2
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5457275Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260608.135/images/windows/Windows2025-VS2026-Readme.md
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5459571Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260608.135
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5460499Z ##[endgroup]
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5461615Z ##[group]GITHUB_TOKEN Permissions
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5463745Z Contents: read
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5464349Z Metadata: read
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5464866Z Packages: read
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5465427Z ##[endgroup]
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5467556Z Secret source: Actions
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5468315Z Prepare workflow directory
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5810886Z Prepare all required actions
+build-and-screenshot	Set up job	2026-06-11T23:08:03.5848987Z Getting action download info
+build-and-screenshot	Set up job	2026-06-11T23:08:04.1468087Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+build-and-screenshot	Set up job	2026-06-11T23:08:04.2706613Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+build-and-screenshot	Set up job	2026-06-11T23:08:04.4334245Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+build-and-screenshot	Set up job	2026-06-11T23:08:04.7846740Z Complete job name: build-and-screenshot
+build-and-screenshot	Run actions/checkout@v4	﻿2026-06-11T23:08:04.9467919Z ##[group]Run actions/checkout@v4
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9469396Z with:
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9470144Z   repository: nazihyazan/win-
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9480562Z   token: ***
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9481326Z   ssh-strict: true
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9482088Z   ssh-user: git
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9482856Z   persist-credentials: true
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9483703Z   clean: true
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9484475Z   sparse-checkout-cone-mode: true
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9485389Z   fetch-depth: 1
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9486139Z   fetch-tags: false
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9486919Z   show-progress: true
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9487697Z   lfs: false
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9488408Z   submodules: false
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9489187Z   set-safe-directory: true
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:04.9490285Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.1193036Z Syncing repository: nazihyazan/win-
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.1195870Z ##[group]Getting Git version info
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.1196953Z Working directory is 'D:\a\win-\win-'
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.2090140Z [command]"C:\Program Files\Git\bin\git.exe" version
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3521447Z git version 2.54.0.windows.1
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3575999Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3598946Z Temporarily overriding HOME='D:\a\_temp\3a186c8c-0eaf-40ee-a009-0ef1a5b9be20' before making global git config changes
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3602869Z Adding repository directory to the temporary git global config as a safe directory
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3610284Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\win-\win-
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3921655Z Deleting the contents of 'D:\a\win-\win-'
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3928455Z ##[group]Initializing the repository
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.3938403Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\win-\win-
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.4397273Z Initialized empty Git repository in D:/a/win-/win-/.git/
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.4440909Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/nazihyazan/win-
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.4751879Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.4763835Z ##[group]Disabling automatic garbage collection
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.4766307Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.5057279Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.5058754Z ##[group]Setting up auth
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.5076972Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:05.5396506Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:06.4463278Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:06.4830856Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:07.0837903Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:07.1167662Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:07.6634912Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:07.6957762Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:07.6958486Z ##[group]Fetching the repository
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:07.6972376Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ec7f161b3d865ddf8a928dffbdfc074e00688a26:refs/remotes/origin/main
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5098977Z From https://github.com/nazihyazan/win-
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5099614Z  * [new ref]         ec7f161b3d865ddf8a928dffbdfc074e00688a26 -> origin/main
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5303960Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5304670Z ##[group]Determining the checkout info
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5307732Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5319327Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5657019Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5956768Z ##[group]Checking out the ref
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.5967278Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.6488244Z Switched to a new branch 'main'
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.6505423Z branch 'main' set up to track 'origin/main'.
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.6566710Z ##[endgroup]
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.6919667Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+build-and-screenshot	Run actions/checkout@v4	2026-06-11T23:08:08.7196422Z ec7f161b3d865ddf8a928dffbdfc074e00688a26
+build-and-screenshot	Run actions/setup-node@v4	﻿2026-06-11T23:08:08.7635169Z ##[group]Run actions/setup-node@v4
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:08.7635546Z with:
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:08.7635736Z   node-version: 20
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:08.7635959Z   always-auth: false
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:08.7636183Z   check-latest: false
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:08.7639375Z   token: ***
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:08.7639567Z ##[endgroup]
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:09.0071415Z Attempting to download 20...
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:09.8713337Z Acquiring 20.20.2 - x64 from https://github.com/actions/node-versions/releases/download/20.20.2-23521894959/node-20.20.2-win32-x64.7z
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:10.5709420Z Extracting ...
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:12.8265322Z Adding to the cache ...
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:16.6388812Z ##[group]Environment details
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:18.0069531Z node: v20.20.2
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:18.0069957Z npm: 10.8.2
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:18.0070249Z yarn: 1.22.22
+build-and-screenshot	Run actions/setup-node@v4	2026-06-11T23:08:18.0071278Z ##[endgroup]
+build-and-screenshot	Install dependencies	﻿2026-06-11T23:08:18.0365523Z ##[group]Run npm install
+build-and-screenshot	Install dependencies	2026-06-11T23:08:18.0366552Z ^[[36;1mnpm install^[[0m
+build-and-screenshot	Install dependencies	2026-06-11T23:08:18.0505155Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-and-screenshot	Install dependencies	2026-06-11T23:08:18.0505527Z ##[endgroup]
+build-and-screenshot	Install dependencies	2026-06-11T23:08:26.7043412Z npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+build-and-screenshot	Install dependencies	2026-06-11T23:08:27.1503441Z npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+build-and-screenshot	Install dependencies	2026-06-11T23:08:27.2647695Z npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
+build-and-screenshot	Install dependencies	2026-06-11T23:08:27.9357802Z npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+build-and-screenshot	Install dependencies	2026-06-11T23:08:28.2833785Z npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+build-and-screenshot	Install dependencies	2026-06-11T23:08:29.5492003Z npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+build-and-screenshot	Install dependencies	2026-06-11T23:08:36.9723596Z 
+build-and-screenshot	Install dependencies	2026-06-11T23:08:36.9724726Z added 321 packages, and audited 322 packages in 13s
+build-and-screenshot	Install dependencies	2026-06-11T23:08:36.9725252Z 
+build-and-screenshot	Install dependencies	2026-06-11T23:08:36.9725549Z 48 packages are looking for funding
+build-and-screenshot	Install dependencies	2026-06-11T23:08:36.9726089Z   run `npm fund` for details
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0385818Z 
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0386628Z 7 high severity vulnerabilities
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0387103Z 
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0387517Z To address issues that do not require attention, run:
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0388112Z   npm audit fix
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0388329Z 
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0388715Z To address all issues (including breaking changes), run:
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0389335Z   npm audit fix --force
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0389596Z 
+build-and-screenshot	Install dependencies	2026-06-11T23:08:37.0389788Z Run `npm audit` for details.
+build-and-screenshot	Build Windows .exe	﻿2026-06-11T23:08:37.4369448Z ##[group]Run npm run build:win
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:37.4369805Z ^[[36;1mnpm run build:win^[[0m
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:37.4435676Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:37.4436029Z env:
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:37.4439311Z   GH_TOKEN: ***
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:37.4439513Z ##[endgroup]
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.0280390Z 
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.0280982Z > floatboard@1.0.13 build:win
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.0281797Z > electron-builder --win nsis -c.directories.output=dist/windows
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.0282244Z 
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.7776628Z   • electron-builder  version=24.13.3 os=10.0.26100
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.7782149Z   • artifacts will be published if draft release exists  reason=CI detected
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:38.7839257Z   • loaded configuration  file=package.json ("build" field)
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:39.0124703Z   • packaging       platform=win32 arch=x64 electron=29.4.6 appOutDir=dist\windows\win-unpacked
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:39.1852402Z   • downloading     url=https://github.com/electron/electron/releases/download/v29.4.6/electron-v29.4.6-win32-x64.zip size=108 MB parts=8
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:39.3987099Z   • downloaded      url=https://github.com/electron/electron/releases/download/v29.4.6/electron-v29.4.6-win32-x64.zip duration=372ms
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:41.7709723Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.6.0/winCodeSign-2.6.0.7z size=5.6 MB parts=1
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:41.8111922Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.6.0/winCodeSign-2.6.0.7z duration=341ms
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:42.5026645Z   • building        target=nsis file=dist\windows\FloatBoard.Setup.1.0.13.exe archs=x64 oneClick=false perMachine=false
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:42.8145655Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/nsis-3.0.4.1/nsis-3.0.4.1.7z size=1.3 MB parts=1
+build-and-screenshot	Build Windows .exe	2026-06-11T23:08:42.8269925Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/nsis-3.0.4.1/nsis-3.0.4.1.7z duration=307ms
+build-and-screenshot	Build Windows .exe	2026-06-11T23:09:49.3844872Z   • downloading     url=https://github.com/electron-userland/electron-builder-binaries/releases/download/nsis-resources-3.4.1/nsis-resources-3.4.1.7z size=731 kB parts=1
+build-and-screenshot	Build Windows .exe	2026-06-11T23:09:49.3966463Z   • downloaded      url=https://github.com/electron-userland/electron-builder-binaries/releases/download/nsis-resources-3.4.1/nsis-resources-3.4.1.7z duration=344ms
+build-and-screenshot	Build Windows .exe	2026-06-11T23:09:52.0096138Z   • publishing      publisher=Github (owner: nazihyazan, project: win-, version: 1.0.13)
+build-and-screenshot	Build Windows .exe	2026-06-11T23:09:52.0108428Z   • uploading       file=FloatBoard.Setup.1.0.13.exe provider=github
+build-and-screenshot	Build Windows .exe	2026-06-11T23:09:52.4672063Z   • skipped publishing  file=FloatBoard.Setup.1.0.13.exe reason=release doesn't exist and not created because "publish" is not "always" and build is not on tag tag=v1.0.13 version=1.0.13
+build-and-screenshot	Build Windows .exe	2026-06-11T23:09:52.4694275Z   • skipped publishing  file=latest.yml reason=release doesn't exist and not created because "publish" is not "always" and build is not on tag tag=v1.0.13 version=1.0.13
+build-and-screenshot	Take Real Screenshot	﻿2026-06-11T23:09:52.6077755Z ##[group]Run mkdir screenshots
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6078312Z ^[[36;1mmkdir screenshots^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6078683Z ^[[36;1m^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6079109Z ^[[36;1m# Start the unpacked application in the background^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6079899Z ^[[36;1mStart-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6080549Z ^[[36;1m^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6080923Z ^[[36;1m# Wait for the application to load and render^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6081473Z ^[[36;1mStart-Sleep -Seconds 10^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6081882Z ^[[36;1m^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6082183Z ^[[36;1m# Take a screenshot^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6082646Z ^[[36;1mAdd-Type -AssemblyName System.Windows.Forms^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6083212Z ^[[36;1mAdd-Type -AssemblyName System.Drawing^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6083868Z ^[[36;1m$Screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6084729Z ^[[36;1m$Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6085592Z ^[[36;1m$Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6086395Z ^[[36;1m$Graphics.CopyFromScreen($Screen.X, $Screen.Y, 0, 0, $Bitmap.Size)^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6087195Z ^[[36;1m$Bitmap.Save("screenshots/screenshot.png")^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6087689Z ^[[36;1m^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6087947Z ^[[36;1m# Kill the application so workflow can finish^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6088383Z ^[[36;1mStop-Process -Name "FloatBoard" -Force -ErrorAction SilentlyContinue^[[0m
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6159508Z shell: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.6159941Z ##[endgroup]
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9559331Z 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9560833Z 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9564710Z     Directory: D:\a\win-\win-
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9565261Z 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9565671Z 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9577627Z Mode                 LastWriteTime         Length Name                                                                 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9582604Z ----                 -------------         ------ ----                                                                 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:09:52.9593534Z d-----         6/11/2026  11:09 PM                screenshots                                                          
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:10:03.4052979Z 
+build-and-screenshot	Take Real Screenshot	2026-06-11T23:10:03.4054572Z 
+build-and-screenshot	Run actions/upload-artifact@v4	﻿2026-06-11T23:10:03.4616422Z ##[group]Run actions/upload-artifact@v4
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4617210Z with:
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4617544Z   name: FloatBoard-Windows-Build
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4618080Z   path: dist/windows/*.exe
+build-and-screenshot	Run actions/upload-artifact@v4	screenshots/screenshot.png
+build-and-screenshot	Run actions/upload-artifact@v4	
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4618633Z   if-no-files-found: warn
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4619026Z   compression-level: 6
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4619385Z   overwrite: false
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4619738Z   include-hidden-files: false
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.4620115Z ##[endgroup]
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.7598830Z Multiple search paths detected. Calculating the least common ancestor of all paths
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.7603121Z The least common ancestor is D:\a\win-\win-. This will be the root directory of the artifact
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.7605111Z With the provided path, there will be 2 files uploaded
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.7611159Z Artifact name is valid!
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:03.7614614Z Root directory input is valid!
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:04.1723921Z Beginning upload of artifact content to blob storage
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:05.8723918Z Uploaded bytes 8388608
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:06.2066903Z Uploaded bytes 16777216
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:06.3718275Z Uploaded bytes 25165824
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:06.4508844Z Uploaded bytes 33554432
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:06.5413632Z Uploaded bytes 41943040
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:06.7291138Z Uploaded bytes 50331648
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:06.8758849Z Uploaded bytes 58720256
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.0397462Z Uploaded bytes 67108864
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.2556280Z Uploaded bytes 70559659
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.3413621Z Finished uploading artifact content to blob storage!
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.3417516Z SHA256 digest of uploaded artifact zip is 972b1b6d1ff3c28f8ad3adbf2a2e11dc07363c49f137754b1f3b07df39723298
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.3420131Z Finalizing artifact upload
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.5864790Z Artifact FloatBoard-Windows-Build.zip successfully finalized. Artifact ID 7579113175
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.5866364Z Artifact FloatBoard-Windows-Build has been successfully uploaded! Final size is 70559659 bytes. Artifact ID is 7579113175
+build-and-screenshot	Run actions/upload-artifact@v4	2026-06-11T23:10:07.5881309Z Artifact download URL: https://github.com/nazihyazan/win-/actions/runs/27383154179/artifacts/7579113175
+build-and-screenshot	Post Run actions/setup-node@v4	﻿2026-06-11T23:10:07.6232030Z Post job cleanup.
+build-and-screenshot	Post Run actions/checkout@v4	﻿2026-06-11T23:10:07.8729219Z Post job cleanup.
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.1177762Z [command]"C:\Program Files\Git\bin\git.exe" version
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.1492470Z git version 2.54.0.windows.1
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.1585081Z Temporarily overriding HOME='D:\a\_temp\6b4ca3d2-a285-404c-b4d4-c956862e55c9' before making global git config changes
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.1586493Z Adding repository directory to the temporary git global config as a safe directory
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.1597813Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\win-\win-
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.1948695Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.2294342Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.7912129Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.8200361Z http.https://github.com/.extraheader
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.8245347Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:08.8557684Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:09.4090152Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+build-and-screenshot	Post Run actions/checkout@v4	2026-06-11T23:10:09.4396068Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+build-and-screenshot	Complete job	﻿2026-06-11T23:10:10.0008063Z Cleaning up orphan processes
+build-and-screenshot	Complete job	2026-06-11T23:10:10.0052184Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. Actions will be forced to run with Node.js 24 by default starting June 16th, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

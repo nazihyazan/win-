@@ -238,8 +238,8 @@ function createWindow() {
     icon: getIconPath(),
     frame: process.platform === 'darwin',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
-    transparent: process.platform === 'win32',
-    backgroundColor: process.platform === 'win32' ? '#00000000' : '#ffffff',
+    transparent: false,
+    backgroundColor: '#ffffff',
     hasShadow: true,
     resizable: true,
     minimizable: true,
@@ -266,6 +266,14 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   mainWindow.once('ready-to-show', () => {
+    if (process.env.FORCE_THEME_DARK) {
+      mainWindow.webContents.executeJavaScript(`
+        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+      `).then(() => {
+        mainWindow.setBackgroundColor('#1a1a1e');
+      });
+    }
     showWindow();
   });
 
@@ -763,7 +771,7 @@ app.whenReady().then(() => {
   });
   // Added theme:change for instant background color transition
   ipcMain.on('theme:change', (_event, theme) => {
-    if (mainWindow && !mainWindow.isDestroyed() && process.platform !== 'win32') {
+    if (mainWindow && !mainWindow.isDestroyed()) {
       mainWindow.setBackgroundColor(theme === 'dark' ? '#1a1a1e' : '#ffffff');
     }
   });
