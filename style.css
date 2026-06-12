@@ -1543,6 +1543,14 @@ body.platform-win32 .window-shell {
   -webkit-backdrop-filter: none !important;
 }
 
-body.platform-win32[data-theme="dark"] .window-shell {
+body.platform-win32 .chrome-bar {
+  background: #f3f3f3 !important;
+}
+
+[data-theme="dark"] body.platform-win32 .window-shell {
   background: #1e1e1e !important;
+}
+
+[data-theme="dark"] body.platform-win32 .chrome-bar {
+  background: #2d2d30 !important;
 }
