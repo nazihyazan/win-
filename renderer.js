@@ -2033,4 +2033,3 @@ sectionsEl.addEventListener('dragend', (e) => {
     el.classList.remove('dragging', 'drag-over-top', 'drag-over-bottom');
   });
 });
-});
