@@ -238,8 +238,8 @@ function createWindow() {
     icon: getIconPath(),
     frame: process.platform === 'darwin',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
-    transparent: process.platform === 'win32',
-    backgroundColor: process.platform === 'win32' ? '#00000000' : '#ffffff',
+    transparent: false,
+    backgroundColor: '#ffffff',
     hasShadow: true,
     resizable: true,
     minimizable: true,
@@ -267,6 +267,26 @@ function createWindow() {
 
   mainWindow.once('ready-to-show', () => {
     showWindow();
+    
+    if (process.env.TEST_STATE) {
+      setTimeout(() => {
+        const state = process.env.TEST_STATE;
+        mainWindow.webContents.executeJavaScript(`
+          if ('${state}' === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            if (window.api && window.api.changeTheme) window.api.changeTheme('dark');
+          } else if ('${state}' === 'history') {
+            document.getElementById('history-btn').click();
+          } else if ('${state}' === 'shortcuts') {
+            document.getElementById('shortcuts-btn').click();
+          } else if ('${state}' === 'settings') {
+            document.getElementById('settings-btn').click();
+          }
+        `);
+        if (state === 'dark') mainWindow.setBackgroundColor('#1a1a1e');
+      }, 500);
+    }
   });
 
   mainWindow.webContents.on('context-menu', (_event, params) => {

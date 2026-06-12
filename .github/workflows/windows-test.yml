@@ -30,25 +30,39 @@ jobs:
           (New-Object -ComObject Shell.Application).MinimizeAll()
           Start-Sleep -Seconds 2
           
-          # Start the unpacked application in the background
-          Start-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"
+          # Create screenshot function
+          function Test-UIState {
+              param([string]$StateName)
+              
+              if ($StateName -ne "light") {
+                  $env:TEST_STATE = $StateName
+              } else {
+                  Remove-Item Env:\TEST_STATE -ErrorAction SilentlyContinue
+              }
+              
+              Start-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"
+              Start-Sleep -Seconds 12
+              
+              Add-Type -AssemblyName System.Windows.Forms
+              Add-Type -AssemblyName System.Drawing
+              $Screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
+              $Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
+              $Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)
+              $Graphics.CopyFromScreen($Screen.X, $Screen.Y, 0, 0, $Bitmap.Size)
+              $Bitmap.Save("screenshots/screenshot_$StateName.png")
+              
+              Stop-Process -Name "FloatBoard" -Force -ErrorAction SilentlyContinue
+              Start-Sleep -Seconds 2
+          }
           
-          # Wait for the application to load and render
-          Start-Sleep -Seconds 15
-          
-          # Take a screenshot
-          Add-Type -AssemblyName System.Windows.Forms
-          Add-Type -AssemblyName System.Drawing
-          $Screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
-          $Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
-          $Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)
-          $Graphics.CopyFromScreen($Screen.X, $Screen.Y, 0, 0, $Bitmap.Size)
-          $Bitmap.Save("screenshots/screenshot.png")
-          
-          # Kill the application so workflow can finish
-          Stop-Process -Name "FloatBoard" -Force -ErrorAction SilentlyContinue
+          # Run tests
+          Test-UIState -StateName "light"
+          Test-UIState -StateName "dark"
+          Test-UIState -StateName "history"
+          Test-UIState -StateName "shortcuts"
+          Test-UIState -StateName "settings"
       
       - uses: actions/upload-artifact@v4
         with:
-          name: FloatBoard-Windows-Screenshot
-          path: screenshots/screenshot.png
+          name: FloatBoard-Windows-Screenshots
+          path: screenshots/*.png
