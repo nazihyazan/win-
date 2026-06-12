@@ -1349,7 +1349,7 @@ input:checked + .slider:before {
 .platform-win32 .windows-traffic-lights,
 .platform-linux .windows-traffic-lights {
   order: 3;
-  margin-right: -12px;
+  margin-right: -10px;
 }
 
 
