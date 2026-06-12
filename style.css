@@ -1221,9 +1221,12 @@ input:checked + .slider:before {
 #image-preview-img:active { cursor: grabbing; }
 
 .preview-controls {
-  position: absolute;
-  bottom: -40px;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex; gap: 10px; justify-content: center;
+  z-index: 10000;
 }
 
 .preview-controls button {

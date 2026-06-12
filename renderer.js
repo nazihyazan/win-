@@ -1800,6 +1800,10 @@ previewImg.addEventListener('mousedown', (e) => {
   }
 });
 
+previewImg.addEventListener('dragstart', (e) => {
+  e.preventDefault();
+});
+
 document.addEventListener('mousemove', (e) => {
   if (previewDragging) {
     previewPanX = e.clientX - previewStartX;
