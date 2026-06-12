@@ -206,7 +206,7 @@ button {
 
 .windows-traffic-lights {
   display: flex;
-  height: 42px;
+  align-self: stretch;
   -webkit-app-region: no-drag;
 }
 .win-btn {
@@ -226,7 +226,7 @@ button {
 }
 .win-btn svg {
   display: block;
-  transform: translateY(-1px);
+  margin: auto;
 }
 .win-btn:hover {
   background-color: var(--hover-bg);
