@@ -695,17 +695,16 @@ function renderMediaGrid(section) {
   for (const item of section.items) {
     const mediaItem = document.createElement('article');
     mediaItem.className = 'media-item';
-    mediaItem.title = item.name || TYPE_META[section.type].title;
+    // mediaItem.title removed to only show name in history
     mediaItem.dataset.id = item.id;
     mediaItem.draggable = true;
 
     if (item.exists === false) {
       mediaItem.innerHTML = '<div class="missing-media">Missing file</div>';
-    } else if (section.type === 'image') {
+    } else if (item.mime && item.mime.startsWith('image/')) {
       const img = document.createElement('img');
       img.src = item.src;
       img.alt = item.name || 'Image';
-      img.draggable = false;
       mediaItem.appendChild(img);
     } else {
       const video = document.createElement('video');
@@ -1157,6 +1156,11 @@ function clearAllHistory() {
 function renderHistoryList() {
   const listEl = document.getElementById('history-list');
   if (!listEl) return;
+
+  const headerEl = document.querySelector('.history-header h3');
+  if (headerEl) {
+    headerEl.textContent = `History (${historyItems.length})`;
+  }
 
   if (historyItems.length === 0) {
     listEl.innerHTML = `
