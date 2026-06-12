@@ -880,7 +880,11 @@ async function addFile(file) {
     let item;
     if (kind === 'image') {
       const tempSrc = URL.createObjectURL(file);
-      item = await flattenImageToItem(tempSrc, file.name);
+      let fileName = file.name;
+      if (!fileName || fileName.toLowerCase() === 'image.png' || fileName.toLowerCase() === 'screenshot.png') {
+        fileName = `Screenshot ${new Date().toISOString().replace(/T/, ' ').replace(/\\..+/, '').replace(/:/g, '-')}.png`;
+      }
+      item = await flattenImageToItem(tempSrc, fileName);
       URL.revokeObjectURL(tempSrc);
     } else {
       item = await createMediaItem(file, kind);
@@ -1879,6 +1883,16 @@ api.onMediaAutoAdded(async (item) => {
   activeType = 'image';
   render();
   queueSave();
+});
+
+api.onMediaAutoAdded((item) => {
+  const section = ensureSection(item.kind);
+  section.items.push(item);
+  section.updatedAt = now();
+  activeType = item.kind;
+  render();
+  queueSave();
+  updateUsageBadge();
 });
 
 api.onHistoryShow((clipHistory) => {
