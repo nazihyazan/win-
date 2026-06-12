@@ -236,6 +236,7 @@ button {
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-width: 0;
   gap: 7px;
   color: var(--body-color);
@@ -1335,21 +1336,20 @@ input:checked + .slider:before {
   height: 10px;
 }
 
-
-
-/* Linux */
-/* Linux keeps the HTML buttons because titleBarStyle 'hidden' is not supported */
-.platform-linux .chrome-bar {
-  grid-template-columns: auto minmax(0, 1fr) 86px;
+.platform-win32 .window-actions,
+.platform-linux .window-actions {
+  order: 1;
 }
-.platform-linux .traffic-lights {
+.platform-win32 .window-title,
+.platform-linux .window-title {
+  order: 2;
+}
+.platform-win32 .windows-traffic-lights,
+.platform-linux .windows-traffic-lights {
   order: 3;
-  justify-content: flex-end;
+  margin-right: -12px;
 }
 
-.platform-linux .traffic-button.minimize { order: 1; }
-.platform-linux .traffic-button.maximize { order: 2; }
-.platform-linux .traffic-button.close { order: 3; }
 
 .update-toast {
   position: fixed;
