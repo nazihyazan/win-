@@ -56,7 +56,7 @@ let upgradeModal = null;
 let hasShownUpgradeModal = false;
 
 async function updateUsageBadge() {
-  const badge = document.getElementById('usage-badge');
+  const badge = document.getElementById('limit-badge');
   if (isPremium) {
     if (badge) badge.style.display = 'none';
     return;

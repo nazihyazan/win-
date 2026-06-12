@@ -834,7 +834,7 @@ app.whenReady().then(() => {
              mainWindow.webContents.send('media:auto-added', {
                id: crypto.randomUUID(),
                kind: 'image',
-               name: 'screenshot.png',
+               name: `Screenshot ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/g, '-')}.png`,
                mime: 'image/png',
                size: imgBuffer.length,
                storage: 'file',

@@ -250,6 +250,7 @@ button {
 }
 
 .icon-button {
+  position: relative;
   width: 26px;
   height: 26px;
   display: grid;
@@ -1526,13 +1527,7 @@ input:checked + .slider:before {
 }
 
 /* Windows Native Frame Overrides */
-body.platform-win32 .traffic-lights {
-  display: none !important;
-}
 
-body.platform-win32 .window-title {
-  display: none !important;
-}
 
 body.platform-win32 .window-shell {
   border: none !important;
@@ -1553,4 +1548,20 @@ body.platform-win32 .chrome-bar {
 
 [data-theme="dark"] body.platform-win32 .chrome-bar {
   background: #2d2d30 !important;
+}
+
+.limit-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #2ed573;
+  color: white;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 10px;
+  min-width: 14px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 10;
 }
