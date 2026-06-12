@@ -826,7 +826,10 @@ async function createMediaItem(file, kind) {
   };
 }
 
-async function flattenImageToItem(src, originalName = 'screenshot.png') {
+async function flattenImageToItem(src, originalName) {
+  if (!originalName || originalName.toLowerCase() === 'screenshot.png' || originalName.toLowerCase() === 'image.png') {
+    originalName = `Screenshot ${new Date().toISOString().replace(/T/, ' ').replace(/\\..+/, '').replace(/:/g, '-')}.png`;
+  }
   return new Promise((resolve, reject) => {
     const img = new Image();
     // Allow cross-origin to avoid tainted canvas if loading from remote URL
