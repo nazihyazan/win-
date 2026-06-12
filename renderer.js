@@ -42,8 +42,9 @@ const sectionsEl = document.getElementById('sections');
 const emptyStateEl = document.getElementById('empty-state');
 const toastEl = document.getElementById('toast');
 const resizeGripEl = document.getElementById('resize-grip');
+const searchInput = document.getElementById('search-input');
 const pinBtn = document.getElementById('pin-btn');
-const maximizeBtn = document.getElementById('maximize-btn');
+const themeBtn = document.getElementById('theme-btn');
 
 let state = {
   version: 1,
@@ -107,14 +108,6 @@ try {
   historyItems = [];
 }
 
-document.getElementById('close-btn').addEventListener('click', () => {
-  saveNow();
-  api.close();
-});
-
-document.getElementById('minimize-btn').addEventListener('click', () => api.minimize());
-maximizeBtn.addEventListener('click', () => api.toggleMaximize());
-
 pinBtn.addEventListener('click', () => api.togglePin());
 
 api.onWindowStatus(updateWindowStatus);
@@ -125,7 +118,6 @@ function updateWindowStatus(status) {
 
   pinBtn.classList.toggle('pinned', Boolean(status.pinned));
   pinBtn.setAttribute('aria-pressed', String(Boolean(status.pinned)));
-  maximizeBtn.classList.toggle('maximized', Boolean(status.maximized));
 }
 
 function createId() {
@@ -2041,5 +2033,4 @@ sectionsEl.addEventListener('dragend', (e) => {
     el.classList.remove('dragging', 'drag-over-top', 'drag-over-bottom');
   });
 });
-
-
+});
