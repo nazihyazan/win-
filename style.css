@@ -161,8 +161,7 @@ button {
 .chrome-bar {
   position: relative;
   z-index: 10;
-  display: grid;
-  grid-template-columns: 86px minmax(0, 1fr) 48px;
+  display: flex;
   align-items: center;
   min-height: 42px;
   padding: 0 12px;
@@ -205,7 +204,36 @@ button {
   filter: brightness(0.96) saturate(1.12);
 }
 
+.windows-traffic-lights {
+  display: flex;
+  height: 42px;
+  -webkit-app-region: no-drag;
+}
+.win-btn {
+  background: transparent;
+  border: none;
+  color: var(--chrome-title-color);
+  width: 46px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 0;
+  padding: 0;
+}
+.win-btn:hover {
+  background-color: var(--hover-bg);
+  opacity: 1;
+}
+.win-btn.close:hover {
+  background-color: #e81123;
+  color: white;
+}
 .window-title {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1243,7 +1271,8 @@ input:checked + .slider:before {
 
 /* Mac (Darwin) */
 /* Hide HTML buttons since we use native titleBarStyle: 'hidden' traffic lights */
-.platform-darwin .traffic-lights {
+.platform-darwin .traffic-lights,
+.platform-darwin .windows-traffic-lights {
   display: none;
 }
 /* Shift the layout so title doesn't overlap with native left traffic lights */
@@ -1571,4 +1600,15 @@ body.platform-linux .chrome-bar {
   text-align: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   z-index: 10;
+}
+
+/* Drag and Drop Helpers */
+.text-card.dragging, .media-item.dragging {
+  opacity: 0.5;
+}
+.text-card.drag-over-top, .media-item.drag-over-top {
+  box-shadow: 0 -4px 0 var(--chrome-border-color) !important;
+}
+.text-card.drag-over-bottom, .media-item.drag-over-bottom {
+  box-shadow: 0 4px 0 var(--chrome-border-color) !important;
 }
