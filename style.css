@@ -224,6 +224,10 @@ button {
   border-radius: 0;
   padding: 0;
 }
+.win-btn svg {
+  display: block;
+  transform: translateY(-1px);
+}
 .win-btn:hover {
   background-color: var(--hover-bg);
   opacity: 1;
