@@ -39,6 +39,9 @@
       "main.js",
       "index.html",
       "license.js",
+      "preload.js",
+      "renderer.js",
+      "style.css",
       "assets/**/*"
     ],
     "mac": {
