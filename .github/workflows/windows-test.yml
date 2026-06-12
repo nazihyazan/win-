@@ -30,42 +30,25 @@ jobs:
           (New-Object -ComObject Shell.Application).MinimizeAll()
           Start-Sleep -Seconds 2
           
-          # Start the unpacked application in the background (Light Theme)
+          # Start the unpacked application in the background
           Start-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"
           
           # Wait for the application to load and render
           Start-Sleep -Seconds 15
           
-          # Take Light screenshot
+          # Take a screenshot
           Add-Type -AssemblyName System.Windows.Forms
           Add-Type -AssemblyName System.Drawing
           $Screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds
           $Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
           $Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)
           $Graphics.CopyFromScreen($Screen.X, $Screen.Y, 0, 0, $Bitmap.Size)
-          $Bitmap.Save("screenshots/screenshot_light.png")
-          
-          # Kill the application
-          Stop-Process -Name "FloatBoard" -Force -ErrorAction SilentlyContinue
-          Start-Sleep -Seconds 2
-          
-          # Start the unpacked application with FORCE_THEME_DARK env variable
-          $env:FORCE_THEME_DARK = "true"
-          Start-Process -FilePath "dist/windows/win-unpacked/FloatBoard.exe"
-          
-          # Wait for the application to load and render
-          Start-Sleep -Seconds 15
-          
-          # Take Dark screenshot
-          $Bitmap = New-Object System.Drawing.Bitmap $Screen.Width, $Screen.Height
-          $Graphics = [System.Drawing.Graphics]::FromImage($Bitmap)
-          $Graphics.CopyFromScreen($Screen.X, $Screen.Y, 0, 0, $Bitmap.Size)
-          $Bitmap.Save("screenshots/screenshot_dark.png")
+          $Bitmap.Save("screenshots/screenshot.png")
           
           # Kill the application so workflow can finish
           Stop-Process -Name "FloatBoard" -Force -ErrorAction SilentlyContinue
       
       - uses: actions/upload-artifact@v4
         with:
-          name: FloatBoard-Windows-Screenshots
-          path: screenshots/*.png
+          name: FloatBoard-Windows-Screenshot
+          path: screenshots/screenshot.png
