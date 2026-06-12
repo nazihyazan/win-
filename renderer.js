@@ -699,9 +699,13 @@ function renderMediaGrid(section) {
     mediaItem.dataset.id = item.id;
     mediaItem.draggable = true;
 
+    const isImage = (item.mime && item.mime.startsWith('image/')) || 
+                    (section.type === 'image') || 
+                    (item.name && /\\.(png|jpe?g|gif|webp|bmp|svg|ico)$/i.test(item.name));
+
     if (item.exists === false) {
       mediaItem.innerHTML = '<div class="missing-media">Missing file</div>';
-    } else if (item.mime && item.mime.startsWith('image/')) {
+    } else if (isImage) {
       const img = document.createElement('img');
       img.src = item.src;
       img.alt = item.name || 'Image';
@@ -728,6 +732,7 @@ function renderMediaGrid(section) {
         name: item.name, 
         storage: item.storage, 
         fileName: item.fileName, 
+        mime: item.mime,
         createdAt: item.createdAt || now() 
       });
       section.items = section.items.filter((candidate) => candidate.id !== item.id);
@@ -1127,6 +1132,7 @@ function restoreHistoryItem(id) {
     newItem.name = histItem.name;
     newItem.storage = histItem.storage;
     newItem.fileName = histItem.fileName;
+    newItem.mime = histItem.mime;
   }
 
   section.items.push(newItem);
