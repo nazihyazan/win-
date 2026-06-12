@@ -206,22 +206,21 @@ button {
 
 .windows-traffic-lights {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-self: stretch;
   -webkit-app-region: no-drag;
 }
 .win-btn {
   background: transparent;
   border: none;
   color: var(--chrome-title-color);
-  width: 32px;
-  height: 32px;
+  width: 46px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.15s, color 0.15s;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 0;
 }
 .win-btn svg {
@@ -1350,6 +1349,7 @@ input:checked + .slider:before {
 .platform-win32 .windows-traffic-lights,
 .platform-linux .windows-traffic-lights {
   order: 3;
+  margin-right: -12px;
 }
 
 
