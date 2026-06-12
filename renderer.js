@@ -583,6 +583,7 @@ function renderTextCard(item, section) {
   const card = document.createElement('div');
   card.className = 'text-card';
   card.dataset.id = item.id;
+  card.draggable = true;
 
   card.innerHTML = `
     <div class="text-card-header">
@@ -694,6 +695,8 @@ function renderMediaGrid(section) {
     const mediaItem = document.createElement('article');
     mediaItem.className = 'media-item';
     mediaItem.title = item.name || TYPE_META[section.type].title;
+    mediaItem.dataset.id = item.id;
+    mediaItem.draggable = true;
 
     if (item.exists === false) {
       mediaItem.innerHTML = '<div class="missing-media">Missing file</div>';
@@ -701,6 +704,7 @@ function renderMediaGrid(section) {
       const img = document.createElement('img');
       img.src = item.src;
       img.alt = item.name || 'Image';
+      img.draggable = false;
       mediaItem.appendChild(img);
     } else {
       const video = document.createElement('video');
@@ -1954,4 +1958,88 @@ document.addEventListener('mouseup', () => {
 document.body.addEventListener('mouseenter', () => {
   if (api.focus) api.focus();
 });
+
+// --- Drag and Drop Reordering ---
+let dragItemId = null;
+let dragTargetType = null;
+
+sectionsEl.addEventListener('dragstart', (e) => {
+  const card = e.target.closest('.text-card, .media-item');
+  if (!card) return;
+  if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+    e.preventDefault();
+    return;
+  }
+  dragItemId = card.dataset.id;
+  dragTargetType = card.closest('.content-section').dataset.type;
+  card.classList.add('dragging');
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', dragItemId);
+  }
+});
+
+sectionsEl.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  const card = e.target.closest('.text-card, .media-item');
+  if (!card || !dragItemId || card.dataset.id === dragItemId) return;
+  const sectionEl = card.closest('.content-section');
+  if (!sectionEl || sectionEl.dataset.type !== dragTargetType) return;
+  
+  const bounding = card.getBoundingClientRect();
+  const offset = e.clientY - bounding.top;
+  if (offset > bounding.height / 2) {
+    card.classList.add('drag-over-bottom');
+    card.classList.remove('drag-over-top');
+  } else {
+    card.classList.add('drag-over-top');
+    card.classList.remove('drag-over-bottom');
+  }
+});
+
+sectionsEl.addEventListener('dragleave', (e) => {
+  const card = e.target.closest('.text-card, .media-item');
+  if (card) {
+    card.classList.remove('drag-over-top', 'drag-over-bottom');
+  }
+});
+
+sectionsEl.addEventListener('drop', (e) => {
+  e.preventDefault();
+  if (!dragItemId) return;
+  const card = e.target.closest('.text-card, .media-item');
+  if (!card || card.dataset.id === dragItemId) return;
+  const sectionEl = card.closest('.content-section');
+  if (!sectionEl || sectionEl.dataset.type !== dragTargetType) return;
+  
+  const section = ensureSection(dragTargetType);
+  const dragIndex = section.items.findIndex(i => i.id === dragItemId);
+  let targetIndex = section.items.findIndex(i => i.id === card.dataset.id);
+  
+  if (dragIndex === -1 || targetIndex === -1) return;
+  
+  const bounding = card.getBoundingClientRect();
+  const offset = e.clientY - bounding.top;
+  if (offset > bounding.height / 2) {
+    targetIndex++;
+  }
+  
+  if (dragIndex < targetIndex) targetIndex--;
+  
+  const [removed] = section.items.splice(dragIndex, 1);
+  section.items.splice(targetIndex, 0, removed);
+  
+  section.updatedAt = now();
+  queueSave();
+  render();
+});
+
+sectionsEl.addEventListener('dragend', (e) => {
+  dragItemId = null;
+  dragTargetType = null;
+  document.querySelectorAll('.text-card, .media-item').forEach(el => {
+    el.classList.remove('dragging', 'drag-over-top', 'drag-over-bottom');
+  });
+});
+
 
