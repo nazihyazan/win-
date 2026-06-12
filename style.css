@@ -236,7 +236,6 @@ button {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   min-width: 0;
   gap: 7px;
   color: var(--body-color);
@@ -1336,14 +1335,7 @@ input:checked + .slider:before {
   height: 10px;
 }
 
-.platform-win32 .window-actions,
-.platform-linux .window-actions {
-  order: 1;
-}
-.platform-win32 .window-title,
-.platform-linux .window-title {
-  order: 2;
-}
+
 
 /* Linux */
 /* Linux keeps the HTML buttons because titleBarStyle 'hidden' is not supported */
@@ -1354,13 +1346,7 @@ input:checked + .slider:before {
   order: 3;
   justify-content: flex-end;
 }
-.platform-linux .window-actions {
-  order: 1;
-  justify-content: flex-start;
-}
-.platform-linux .window-title {
-  order: 2;
-}
+
 .platform-linux .traffic-button.minimize { order: 1; }
 .platform-linux .traffic-button.maximize { order: 2; }
 .platform-linux .traffic-button.close { order: 3; }
