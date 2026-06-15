@@ -22,7 +22,8 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
-    "electron-updater": "^6.1.8"
+    "electron-updater": "^6.1.8",
+    "node-machine-id": "^1.1.12"
   },
   "devDependencies": {
     "electron": "^29.4.6",

@@ -69,3 +69,10 @@ jobs:
         with:
           name: FloatBoard-Windows-Screenshots
           path: screenshots/*.png
+          
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FloatBoard-Windows-Executable
+          path: |
+            dist/windows/*.exe
+            dist/windows/*.zip

@@ -1382,27 +1382,19 @@ async function init() {
       licenseSubmitBtn.textContent = 'Verifying...';
       
       try {
-        const isValid = await verifyLicenseKey(email, key);
+        const success = await api.activateLicense(email, key);
         
-        if (isValid) {
-          const success = await api.activateLicense(key);
-          if (success) {
-            isPremium = true;
-            localStorage.setItem('floatboard-email', email);
-            if (activateBtn) activateBtn.style.display = 'none';
-            if (premiumBadge) premiumBadge.style.display = 'inline-block';
-            licenseOverlay.classList.remove('active');
-            isLicenseModalOpen = false;
-            showToast('Activation Successful ✓');
-          } else {
-            if (licenseError) {
-              licenseError.textContent = 'Failed to save license locally';
-              licenseError.style.display = 'block';
-            }
-          }
+        if (success) {
+          isPremium = true;
+          localStorage.setItem('floatboard-email', email);
+          if (activateBtn) activateBtn.style.display = 'none';
+          if (premiumBadge) premiumBadge.style.display = 'inline-block';
+          licenseOverlay.classList.remove('active');
+          isLicenseModalOpen = false;
+          showToast('Activation Successful ✓');
         } else {
           if (licenseError) {
-            licenseError.textContent = 'Invalid License Key. Please make sure you are using the exact email address you used during purchase.';
+            licenseError.textContent = 'Invalid License Key or already in use.';
             licenseError.style.display = 'block';
           }
         }
@@ -1479,32 +1471,7 @@ async function createCheckout(email) {
   return `https://floatboard.xyz/pricing.html?email=${encodeURIComponent(email.trim())}`;
 }
 
-async function verifyLicenseKey(email, key) {
-  try {
-    const response = await fetch('https://api.lemonsqueezy.com/v1/licenses/validate', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams({
-        license_key: key.trim()
-      })
-    });
-    
-    const data = await response.json();
-    
-    if (data.valid && data.meta && data.meta.customer_email) {
-      // Strictly enforce that the email matches the one from LemonSqueezy
-      return data.meta.customer_email.toLowerCase() === email.trim().toLowerCase();
-    }
-    
-    return false;
-  } catch (error) {
-    console.error('Verification error:', error);
-    return false;
-  }
-}
+
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);

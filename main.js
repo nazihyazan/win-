@@ -18,6 +18,7 @@ ipcMain.handle('updater:quit-and-install', () => {
 const { pathToFileURL } = require('url');
 const crypto = require('crypto');
 const { isPremium, activateLicense } = require('./license.js');
+const { machineIdSync } = require('node-machine-id');
 
 const APP_NAME = 'FloatBoard';
 const DEFAULT_BOUNDS = { width: 460, height: 460 };
@@ -587,12 +588,75 @@ ipcMain.handle('board:save', async (_event, data) => {
   return true;
 });
 
+async function verifyWithKeygen(email, key) {
+  try {
+    const fingerprint = machineIdSync(true); // جلب بصمة الحاسوب
+
+    // 1. التحقق من السيروت واش صالح لهاد البصمة
+    const response = await net.fetch('https://api.keygen.sh/v1/accounts/dcc57dd7-bfd1-4469-a4f4-7c8545660f76/licenses/actions/validate-key', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/vnd.api+json',
+        'Accept': 'application/vnd.api+json'
+      },
+      body: JSON.stringify({
+        meta: {
+          key: key.trim(),
+          scope: { fingerprint: fingerprint }
+        }
+      })
+    });
+    
+    const data = await response.json();
+    
+    // يلا كان السيروت صحيح ومربوط مع هاد الحاسوب
+    if (data.meta && data.meta.valid) {
+      return true;
+    }
+    
+    // 2. يلا كان السيروت صحيح ولكن مزال مامربوط بحتى حاسوب، كنربطوه
+    if (data.meta && (data.meta.code === 'NO_MACHINES' || data.meta.code === 'NO_MACHINE')) {
+      const activateResponse = await net.fetch('https://api.keygen.sh/v1/accounts/dcc57dd7-bfd1-4469-a4f4-7c8545660f76/machines', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/vnd.api+json',
+          'Accept': 'application/vnd.api+json',
+          'Authorization': `License ${key.trim()}`
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'machines',
+            attributes: {
+              fingerprint: fingerprint,
+              name: require('os').hostname() || 'FloatBoard User PC'
+            },
+            relationships: {
+              license: { data: { type: 'licenses', id: data.data.id } }
+            }
+          }
+        })
+      });
+      
+      return activateResponse.ok;
+    }
+    
+    return false;
+  } catch (error) {
+    console.error('Keygen Verification Error:', error);
+    return false;
+  }
+}
+
 ipcMain.handle('license:is-premium', () => {
   return isPremium();
 });
 
-ipcMain.handle('license:activate', (_event, key) => {
-  return activateLicense(key);
+ipcMain.handle('license:activate', async (_event, email, key) => {
+  const isValid = await verifyWithKeygen(email, key);
+  if (isValid) {
+    return activateLicense(email, key);
+  }
+  return false;
 });
 
 ipcMain.handle('license:check-daily-limit', async (_event, kind) => {

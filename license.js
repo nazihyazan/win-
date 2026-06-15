@@ -8,33 +8,21 @@ function isPremium() {
         if (!fs.existsSync(keyPath)) return false;
         
         const content = fs.readFileSync(keyPath, 'utf8').trim();
-        
         let key = content;
-        // Try parsing as JSON first (new format)
+        
         try {
             const data = JSON.parse(content);
             if (data && data.key) {
                 key = data.key;
             }
         } catch (e) {
-            // Fallback to raw string (old format) and auto-migrate
+            // Fallback for old format
             if (typeof key === 'string' && key.length > 10) {
-                // Auto-migrate to JSON format in the background
-                try {
-                    const data = {
-                        email: '',
-                        key: key,
-                        activatedAt: new Date().toISOString(),
-                        migrated: true
-                    };
-                    fs.writeFileSync(keyPath, JSON.stringify(data, null, 2), 'utf8');
-                } catch (writeErr) {
-                    // Ignore write errors during migration
-                }
+                const data = { email: '', key: key, activatedAt: new Date().toISOString() };
+                fs.writeFileSync(keyPath, JSON.stringify(data, null, 2), 'utf8');
             }
         }
         
-        // Basic offline check - ensure key is present and looks like a valid string
         return typeof key === 'string' && key.length > 10;
     } catch (error) {
         return false;
@@ -58,7 +46,7 @@ function activateLicense(email, key) {
         fs.writeFileSync(path.join(dirPath, 'license.key'), JSON.stringify(data, null, 2), 'utf8');
         return true;
     } catch (error) {
-        console.error('Error saving license locally:', error);
+        console.error('Error saving license:', error);
         return false;
     }
 }
