@@ -63,9 +63,8 @@ async function updateUsageBadge() {
     if (badge) badge.style.display = 'none';
     return;
   }
-  const usage = await api.getDailyUsage();
-  if (badge) {
-    const remaining = Math.max(0, 10 - usage);
+  const remaining = await api.getDailyUsage();
+  if (badge && remaining !== -1) {
     badge.textContent = remaining;
     badge.style.background = remaining <= 3 ? '#ff4757' : '#2ed573';
     badge.style.display = 'inline-block';
@@ -1896,25 +1895,16 @@ document.addEventListener('click', (event) => {
 
 api.onMediaAutoAdded(async (item) => {
   if (isLicenseModalOpen) return;
-  const allowed = await checkDailyLimit('image');
+  const kind = item.kind || 'image';
+  const allowed = await checkDailyLimit(kind);
   if (!allowed) return;
   
-  const section = ensureSection('image');
+  const section = ensureSection(kind);
   section.items.push(item);
   section.updatedAt = now();
-  activeType = 'image';
+  activeType = kind;
   render();
   queueSave();
-});
-
-api.onMediaAutoAdded((item) => {
-  const section = ensureSection(item.kind);
-  section.items.push(item);
-  section.updatedAt = now();
-  activeType = item.kind;
-  render();
-  queueSave();
-  updateUsageBadge();
 });
 
 api.onHistoryShow((clipHistory) => {

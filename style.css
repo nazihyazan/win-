@@ -4,6 +4,7 @@
   --border-color: rgba(255, 255, 255, 0.64);
   --chrome-bg: rgba(255, 255, 255, 0.28);
   --chrome-border-color: rgba(37, 45, 60, 0.08);
+  --chrome-title-color: #16181d;
   
   --text-card-bg: rgba(255, 255, 255, 0.28);
   --text-card-bg-hover: rgba(255, 255, 255, 0.42);
@@ -34,6 +35,8 @@
   --minimize-btn-bg: #ffbd2e;
   --maximize-btn-bg: #28c840;
   
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  
   --placeholder-color: #999;
 }
 
@@ -43,6 +46,7 @@
   --border-color: rgba(255, 255, 255, 0.15);
   --chrome-bg: rgba(0, 0, 0, 0.15);
   --chrome-border-color: rgba(255, 255, 255, 0.08);
+  --chrome-title-color: #e0e0e0;
   
   --text-card-bg: rgba(255, 255, 255, 0.05);
   --text-card-bg-hover: rgba(255, 255, 255, 0.09);
@@ -72,6 +76,8 @@
   --close-btn-bg: #ff605c;
   --minimize-btn-bg: #ffbd2e;
   --maximize-btn-bg: #00ca4e;
+  
+  --hover-bg: rgba(255, 255, 255, 0.1);
   
   --placeholder-color: #666;
 }
@@ -164,7 +170,7 @@ button {
   display: flex;
   align-items: center;
   min-height: 42px;
-  padding: 0 12px;
+  padding: 0 0 0 12px;
   border-bottom: 1px solid var(--chrome-border-color);
   background: var(--chrome-bg);
   -webkit-app-region: drag;
@@ -1349,7 +1355,7 @@ input:checked + .slider:before {
 .platform-win32 .windows-traffic-lights,
 .platform-linux .windows-traffic-lights {
   order: 3;
-  margin-right: -10px;
+  margin-right: 0;
 }
 
 

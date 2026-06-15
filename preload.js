@@ -36,7 +36,7 @@ contextBridge.exposeInMainWorld('floatingBoard', {
   isPremium: () => ipcRenderer.invoke('license:is-premium'),
   activateLicense: (key) => ipcRenderer.invoke('license:activate', key),
   checkDailyLimit: (kind) => ipcRenderer.invoke('license:check-daily-limit', kind),
-  getDailyUsage: () => ipcRenderer.invoke('license:get-daily-usage'),
+  getDailyUsage: () => ipcRenderer.invoke('license:get-daily-limit'),
   openExternal: (url) => ipcRenderer.send('open-external', url),
 
   getFilePath: (file) => {

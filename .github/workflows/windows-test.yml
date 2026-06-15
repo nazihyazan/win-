@@ -58,8 +58,11 @@ jobs:
           # Run tests
           Test-UIState -StateName "light"
           Test-UIState -StateName "dark"
+          Test-UIState -StateName "added_screenshot"
+          Test-UIState -StateName "deleted_history"
           Test-UIState -StateName "history"
           Test-UIState -StateName "shortcuts"
+          Test-UIState -StateName "maximized"
           Test-UIState -StateName "settings"
       
       - uses: actions/upload-artifact@v4

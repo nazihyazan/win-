@@ -271,6 +271,24 @@ function createWindow() {
     if (process.env.TEST_STATE) {
       setTimeout(() => {
         const state = process.env.TEST_STATE;
+
+        if (state === 'added_screenshot' || state === 'deleted_history') {
+           mainWindow.webContents.send('media:auto-added', {
+               id: crypto.randomUUID(),
+               kind: 'image',
+               name: 'Screenshot ' + new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/g, '-') + '.png',
+               mime: 'image/png',
+               size: 1024,
+               storage: 'file',
+               fileName: 'test.png',
+               src: 'https://placehold.co/400x300/00adef/ffffff.png?text=Test+Screenshot',
+               createdAt: new Date().toISOString()
+           });
+        }
+        if (state === 'maximized') {
+           mainWindow.maximize();
+        }
+
         mainWindow.webContents.executeJavaScript(`
           if ('${state}' === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -282,6 +300,15 @@ function createWindow() {
             document.getElementById('shortcuts-btn').click();
           } else if ('${state}' === 'settings') {
             document.getElementById('settings-btn').click();
+          } else if ('${state}' === 'deleted_history') {
+            setTimeout(() => {
+              const delBtns = document.querySelectorAll('.delete-btn');
+              if (delBtns.length > 0) delBtns[delBtns.length - 1].click();
+              setTimeout(() => {
+                const historyBtn = document.getElementById('history-btn');
+                if (historyBtn) historyBtn.click();
+              }, 500);
+            }, 500);
           }
         `);
         if (state === 'dark') mainWindow.setBackgroundColor('#1a1a1e');
