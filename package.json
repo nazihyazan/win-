@@ -7,7 +7,7 @@
     "start": "env -u ELECTRON_RUN_AS_NODE electron .",
     "dev": "env -u ELECTRON_RUN_AS_NODE electron .",
     "build:linux": "electron-builder --linux deb rpm AppImage -c.directories.output=dist/linux",
-    "build:win": "electron-builder --win nsis -c.directories.output=dist/windows",
+    "build:win": "electron-builder --win dir appx -c.directories.output=dist/windows",
     "build:mac": "electron-builder --mac zip -c.directories.output=dist/macos",
     "build:all": "npm run build:linux && npm run build:win && npm run build:mac"
   },
