@@ -1,5 +1,16 @@
 const api = window.floatingBoard;
 
+// Focus window automatically on mouse hover so commands work without clicking
+window.addEventListener('mouseover', () => {
+  if (api && api.focus && !document.hasFocus()) {
+    api.focus();
+  }
+  const editors = document.querySelectorAll('.text-card-editor');
+  if (editors.length > 0 && document.activeElement !== editors[editors.length - 1]) {
+    editors[editors.length - 1].focus();
+  }
+});
+
 // Instant theme application on load to prevent flashing
 document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'light');
 
@@ -473,6 +484,9 @@ function render(options = {}) {
   emptyStateEl.hidden = count > 0;
   emptyStateEl.classList.toggle('is-hidden', count > 0);
   emptyStateEl.setAttribute('aria-hidden', String(count > 0));
+  const scrollY = window.scrollY;
+  const sectionsScrollY = sectionsEl.scrollTop;
+
   sectionsEl.innerHTML = '';
 
   const fragment = document.createDocumentFragment();
@@ -480,6 +494,9 @@ function render(options = {}) {
     fragment.appendChild(renderSection(section));
   }
   sectionsEl.appendChild(fragment);
+
+  window.scrollTo(0, scrollY);
+  sectionsEl.scrollTop = sectionsScrollY;
 
   if (pendingTextFocus) {
     requestAnimationFrame(() => {
@@ -656,8 +673,14 @@ function renderTextCard(item, section) {
     section.updatedAt = now();
     if (section.items.length === 0) {
       removeSection('text');
+      render();
+    } else {
+      card.remove();
+      const headerTitle = document.querySelector('.text-section .section-title');
+      if (headerTitle) {
+        headerTitle.textContent = `${TYPE_META['text'].title} ${section.items.length}`;
+      }
     }
-    render();
     queueSave();
   });
 
@@ -736,8 +759,16 @@ function renderMediaGrid(section) {
       });
       section.items = section.items.filter((candidate) => candidate.id !== item.id);
       section.updatedAt = now();
-      if (section.items.length === 0) removeSection(section.type);
-      render();
+      if (section.items.length === 0) {
+        removeSection(section.type);
+        render();
+      } else {
+        mediaItem.remove();
+        const headerTitle = document.querySelector(`.${section.type}-section .section-title`);
+        if (headerTitle) {
+          headerTitle.textContent = `${TYPE_META[section.type].title} ${section.items.length}`;
+        }
+      }
       queueSave();
     });
     mediaItem.appendChild(removeButton);
@@ -758,7 +789,17 @@ function renderMediaGrid(section) {
         e.stopPropagation();
         const displayImg = mediaItem.querySelector('img');
         if (displayImg) {
-          await captureImageToClipboard(displayImg);
+          const targetStr = item.storage === 'file' && item.fileName ? item.fileName : item.src;
+          if (api.copyImage) {
+            const success = await api.copyImage(targetStr);
+            if (success) {
+              showToast('Copied to clipboard');
+            } else {
+              showToast('Failed to copy image');
+            }
+          } else {
+            await captureImageToClipboard(displayImg);
+          }
         } else {
           showToast('No image to copy');
         }

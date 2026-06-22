@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, Tray, globalShortcut, ipcMain, nativeImage, protocol, net, shell, clipboard } = require('electron');
+const { app, BrowserWindow, Menu, Tray, globalShortcut, ipcMain, nativeImage, protocol, net, shell, clipboard, screen } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const fs = require('fs');
 const fsp = fs.promises;
@@ -31,6 +31,19 @@ let isQuitting = false;
 let restoreAlwaysOnTopAfterMinimize = false;
 
 app.setName(APP_NAME);
+
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.show();
+      mainWindow.focus();
+    }
+  });
+}
 
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app-media', privileges: { secure: true, standard: true, supportFetchAPI: true, corsEnabled: true, stream: true } }
@@ -130,6 +143,7 @@ function showWindow() {
     mainWindow.restore();
   }
 
+  mainWindow.setAlwaysOnTop(true);
   mainWindow.show();
   mainWindow.focus();
 
@@ -504,7 +518,11 @@ function minimizeMainWindow() {
 
 ipcMain.on('window:focus', () => {
   if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isFocused()) {
+    mainWindow.setAlwaysOnTop(true);
+    mainWindow.show();
     mainWindow.focus();
+    const state = loadWindowState();
+    mainWindow.setAlwaysOnTop(state.alwaysOnTop !== false);
   }
 });
 
@@ -892,6 +910,29 @@ app.whenReady().then(() => {
     ignoreNextClipboardImage = true;
   });
 
+  ipcMain.handle('clipboard:copy-image', async (event, srcOrFileName) => {
+    try {
+      ignoreNextClipboardImage = true;
+      let img;
+      if (srcOrFileName.startsWith('data:')) {
+        img = nativeImage.createFromDataURL(srcOrFileName);
+      } else {
+        const fullPath = path.join(getMediaDir(), srcOrFileName);
+        if (fs.existsSync(fullPath)) {
+          img = nativeImage.createFromPath(fullPath);
+        }
+      }
+      if (img && !img.isEmpty()) {
+        clipboard.writeImage(img);
+        return true;
+      }
+      return false;
+    } catch (err) {
+      console.error('Copy image failed', err);
+      return false;
+    }
+  });
+
   setInterval(() => {
     const text = clipboard.readText();
     if (text && text !== lastText) {
@@ -904,40 +945,62 @@ app.whenReady().then(() => {
     }
 
     // Auto-import clipboard images as screenshots
-    const img = clipboard.readImage();
-    if (img && !img.isEmpty()) {
-      const imgBuffer = img.toPNG();
-      const imgHash = crypto.createHash('md5').update(imgBuffer).digest('hex');
-      if (imgHash !== lastImageHash) {
-        lastImageHash = imgHash;
+    const formats = clipboard.availableFormats();
+    const hasImage = formats.some(f => f.startsWith('image/'));
+    
+    if (hasImage) {
+      const img = clipboard.readImage();
+      if (img && !img.isEmpty()) {
+        const size = img.getSize();
+        const tinyData = img.resize({ width: 16, height: 16 }).toDataURL();
+        const imgHash = size.width + 'x' + size.height + '-' + crypto.createHash('md5').update(tinyData).digest('hex');
         
-        if (ignoreNextClipboardImage) {
-          ignoreNextClipboardImage = false;
-          return;
-        }
-        
-        const fileName = `${Date.now()}-${crypto.randomUUID()}.png`;
-        const dest = path.join(getMediaDir(), fileName);
-        fsp.mkdir(getMediaDir(), { recursive: true }).then(() => {
-          return fsp.writeFile(dest, imgBuffer);
-        }).then(() => {
-          if (mainWindow && !mainWindow.isDestroyed()) {
-             mainWindow.webContents.send('media:auto-added', {
-               id: crypto.randomUUID(),
-               kind: 'image',
-               name: `Screenshot ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/g, '-')}.png`,
-               mime: 'image/png',
-               size: imgBuffer.length,
-               storage: 'file',
-               fileName,
-               src: `app-media://media/${fileName}`,
-               createdAt: new Date().toISOString()
-             });
+        if (imgHash !== lastImageHash) {
+          lastImageHash = imgHash;
+          
+          if (ignoreNextClipboardImage) {
+            ignoreNextClipboardImage = false;
+            return;
           }
-        }).catch(err => console.error('Failed to auto-save clipboard image:', err));
+        
+          const imgBuffer = img.toPNG();
+          const fileName = `${Date.now()}-${crypto.randomUUID()}.png`;
+          const dest = path.join(getMediaDir(), fileName);
+          fsp.mkdir(getMediaDir(), { recursive: true }).then(() => {
+            return fsp.writeFile(dest, imgBuffer);
+          }).then(() => {
+            if (mainWindow && !mainWindow.isDestroyed()) {
+               mainWindow.webContents.send('media:auto-added', {
+                 id: crypto.randomUUID(),
+                 kind: 'image',
+                 name: `Screenshot ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/g, '-')}.png`,
+                 mime: 'image/png',
+                 size: imgBuffer.length,
+                 storage: 'file',
+                 fileName,
+                 src: `app-media://media/${fileName}`,
+                 createdAt: new Date().toISOString()
+               });
+            }
+          }).catch(err => console.error('Failed to auto-save clipboard image:', err));
+        }
       }
     }
   }, 1000);
+
+  setInterval(() => {
+    if (mainWindow && !mainWindow.isDestroyed() && mainWindow.isVisible() && !mainWindow.isFocused()) {
+      const point = screen.getCursorScreenPoint();
+      const bounds = mainWindow.getBounds();
+      if (point.x >= bounds.x && point.x <= bounds.x + bounds.width &&
+          point.y >= bounds.y && point.y <= bounds.y + bounds.height) {
+        mainWindow.setAlwaysOnTop(true);
+        mainWindow.focus();
+        const state = loadWindowState();
+        mainWindow.setAlwaysOnTop(state.alwaysOnTop !== false);
+      }
+    }
+  }, 150);
 
   globalShortcut.register('CommandOrControl+Shift+V', () => {
     if (mainWindow) {

@@ -28,6 +28,7 @@ contextBridge.exposeInMainWorld('floatingBoard', {
 
   saveBlob: (buffer) => ipcRenderer.invoke('media:save-blob', buffer),
   ignoreNextClipboardImage: () => ipcRenderer.send('clipboard:ignore-next'),
+  copyImage: (filePath) => ipcRenderer.invoke('clipboard:copy-image', filePath),
 
   loadBoard: () => ipcRenderer.invoke('board:load'),
   saveBoard: (data) => ipcRenderer.invoke('board:save', data),
